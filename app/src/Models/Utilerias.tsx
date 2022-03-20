@@ -33,7 +33,7 @@ export interface Utilerias_Resultado_getImagen {
 export default class Utilerias 
 {
     static SERVIDOR_LOCAL = "http://localhost:4000/"
-    static SERVIDOR_ONLINE = "http://192.168.8.17:4000/"
+    static SERVIDOR_ONLINE = "http://wingmex.herokuapp.com/"  //"http://192.168.8.17:4000/"
 
     static ERROR_IMAGEN_TIPO = 1
     static ERROR_IMAGEN_SIZE_MAX = 2
