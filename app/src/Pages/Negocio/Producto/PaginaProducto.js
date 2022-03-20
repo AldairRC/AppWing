@@ -1205,6 +1205,7 @@ class PaginaProducto extends react_1.default.Component {
                                     imagen: "",
                                     imagenTipo: ""
                                 }));
+                                this.ocultar_modalMensaje();
                             });
                         }
                     } }),
@@ -1275,6 +1276,7 @@ class PaginaProducto extends react_1.default.Component {
                                     imagenTipo: "",
                                     ubicacion: ""
                                 }));
+                                this.ocultar_modalMensaje();
                             });
                         }
                     } }),

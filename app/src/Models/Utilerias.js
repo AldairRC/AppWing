@@ -218,7 +218,7 @@ class Utilerias {
 }
 exports.default = Utilerias;
 Utilerias.SERVIDOR_LOCAL = "http://localhost:4000/";
-Utilerias.SERVIDOR_ONLINE = "http://192.168.8.17:4000/";
+Utilerias.SERVIDOR_ONLINE = "http://wingmex.herokuapp.com/"; //"http://192.168.8.17:4000/"
 Utilerias.ERROR_IMAGEN_TIPO = 1;
 Utilerias.ERROR_IMAGEN_SIZE_MAX = 2;
 Utilerias.ERROR_IMAGEN_LECTURA = 3;
