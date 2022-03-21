@@ -1,71 +1,77 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 //=====================================================
 //  IMPORTACIONES GENERALES
 //=====================================================
-import React from 'react';
+const react_1 = __importDefault(require("react"));
 // componentes MUI
-import { Button } from '@mui/material';
+const material_1 = require("@mui/material");
 // iconos
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
+const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
+const free_solid_svg_icons_1 = require("@fortawesome/free-solid-svg-icons");
 // carrusel
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Pagination, Navigation, EffectCreative } from 'swiper';
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/effect-creative";
+const react_2 = require("swiper/react");
+const swiper_1 = __importStar(require("swiper"));
+require("swiper/css");
+require("swiper/css/pagination");
+require("swiper/css/navigation");
+require("swiper/css/effect-creative");
 // Utilerias
-import Utilerias from "../../../Models/Utilerias";
+const Utilerias_1 = __importDefault(require("../../../Models/Utilerias"));
 // css
-import './TarjetaProductoMovil.css';
+require("./TarjetaProductoMovil.css");
 //=====================================================
 //  INICIALIZAR CARRUSEL
 //=====================================================
-SwiperCore.use([Pagination, Navigation, EffectCreative]);
+swiper_1.default.use([swiper_1.Pagination, swiper_1.Navigation, swiper_1.EffectCreative]);
 //=====================================================
 //  DEFINCION DEL COMPONENTE
 //=====================================================
-var TarjetaProducto = /** @class */ (function (_super) {
-    __extends(TarjetaProducto, _super);
-    function TarjetaProducto(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state =
+class TarjetaProducto extends react_1.default.Component {
+    constructor(props) {
+        super(props);
+        this.state =
             {
                 modalImagenVisible: false,
                 imagenSeleccionada: null
             };
-        return _this;
     }
     //===============================================================
     //  RENDERIZAR EL CARRUSEL DE IMAGENES
     //===============================================================
-    TarjetaProducto.prototype.renderizarImagenes = function () {
-        var _this = this;
+    renderizarImagenes() {
         if (this.props.producto.imagenes_base64.length == 0) {
-            return (React.createElement("div", { className: 'iconoImagen' },
-                React.createElement(FontAwesomeIcon, { icon: faImage })));
+            return (react_1.default.createElement("div", { className: 'iconoImagen' },
+                react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faImage })));
         }
         // GENERADOR DE IMAGENES DEL CARRUSEL
-        var slidesImagenes = this.props.producto.imagenes_base64.map(function (img, index) {
-            return (React.createElement(SwiperSlide, { className: "itemCarrusel", key: "imgCarrusel-" + index },
-                React.createElement("img", { src: img, onClick: function (evento) { _this.props.handleClick_imagen(img); } })));
+        let slidesImagenes = this.props.producto.imagenes_base64.map((img, index) => {
+            return (react_1.default.createElement(react_2.SwiperSlide, { className: "itemCarrusel", key: "imgCarrusel-" + index },
+                react_1.default.createElement("img", { src: img, onClick: (evento) => { this.props.handleClick_imagen(img); } })));
         });
-        return (React.createElement(Swiper, { className: "carrusel", effect: "creative", slidesPerView: 1, slidesPerGroup: 1, loop: true, autoHeight: true, creativeEffect: {
+        return (react_1.default.createElement(react_2.Swiper, { className: "carrusel", effect: "creative", slidesPerView: 1, slidesPerGroup: 1, loop: true, autoHeight: true, creativeEffect: {
                 prev: {
                     shadow: true,
                     translate: [0, 0, -600]
@@ -76,33 +82,31 @@ var TarjetaProducto = /** @class */ (function (_super) {
             }, pagination: { clickable: true }, navigation: true }, 
         // IMAGENES DEL CARRUSEL
         slidesImagenes));
-    };
+    }
     //====================================================================================
     //                          DEFINICION DEL HTML
     //====================================================================================
-    TarjetaProducto.prototype.render = function () {
-        var _this = this;
-        var labelDimension = null;
+    render() {
+        let labelDimension = null;
         if (this.props.producto.dimension_tipo != "N/A") {
-            var dimension = Utilerias.getNumeroCompletoConComas(this.props.producto.dimension, 2);
+            let dimension = Utilerias_1.default.getNumeroCompletoConComas(this.props.producto.dimension, 2);
             dimension += "  " + this.props.producto.dimension_tipo;
-            labelDimension = (React.createElement("label", { className: 'labelDimension' }, dimension));
+            labelDimension = (react_1.default.createElement("label", { className: 'labelDimension' }, dimension));
         }
-        var labelMarca = null;
+        let labelMarca = null;
         if (this.props.producto.marca_nombre != "") {
-            labelMarca = (React.createElement("label", { className: 'labelMarca' }, this.props.producto.marca_nombre + "  "));
+            labelMarca = (react_1.default.createElement("label", { className: 'labelMarca' }, this.props.producto.marca_nombre + "  "));
         }
-        return (React.createElement("div", { className: 'divTarjeta' },
+        return (react_1.default.createElement("div", { className: 'divTarjeta' },
             this.renderizarImagenes(),
-            React.createElement("div", { className: 'contenedorInfo2' },
-                React.createElement("div", { className: 'divTexto' },
-                    React.createElement("label", { className: 'labelNombre' }, this.props.producto.nombre + "  "),
+            react_1.default.createElement("div", { className: 'contenedorInfo2' },
+                react_1.default.createElement("div", { className: 'divTexto' },
+                    react_1.default.createElement("label", { className: 'labelNombre' }, this.props.producto.nombre + "  "),
                     labelMarca,
                     labelDimension),
-                React.createElement(Button, { className: "botonVer", variant: "contained", onClick: function (evento) {
-                        _this.props.handleClick_botonVer(_this.props.producto.id);
+                react_1.default.createElement(material_1.Button, { className: "botonVer", variant: "contained", onClick: (evento) => {
+                        this.props.handleClick_botonVer(this.props.producto.id);
                     } }, "Ver"))));
-    };
-    return TarjetaProducto;
-}(React.Component));
-export default TarjetaProducto;
+    }
+}
+exports.default = TarjetaProducto;

@@ -1,18 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 //=====================================================
 //  IMPORTACIONES
 //=====================================================
-import { configureStore } from '@reduxjs/toolkit';
-import controladorPaginacion from "./Controladores/controladorPaginacion";
-import controladorModal from "./Controladores/controladorModal";
-import controladorProducto from "./Controladores/controladorProducto";
+const toolkit_1 = require("@reduxjs/toolkit");
+const controladorPaginacion_1 = __importDefault(require("./Controladores/controladorPaginacion"));
+const controladorModal_1 = __importDefault(require("./Controladores/controladorModal"));
+const controladorProducto_1 = __importDefault(require("./Controladores/controladorProducto"));
 //=====================================================
 //  CREACION DEL "store" (DATOS GLOBALES)
 //=====================================================
-var store = configureStore({
+const store = (0, toolkit_1.configureStore)({
     reducer: {
-        controladorPaginacion: controladorPaginacion,
-        controladorModal: controladorModal,
-        controladorProducto: controladorProducto
+        controladorPaginacion: controladorPaginacion_1.default,
+        controladorModal: controladorModal_1.default,
+        controladorProducto: controladorProducto_1.default
     }
 });
-export default store;
+exports.default = store;

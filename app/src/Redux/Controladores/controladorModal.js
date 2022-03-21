@@ -1,29 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ocultarModalCargando = exports.mostrarModalCargando = exports.setMensajeModalCargando = exports.setModalCargandoVisible = exports.controlador = void 0;
 //=================================================================
 //      IMPORTACIONES
 //=================================================================
-import { createSlice } from '@reduxjs/toolkit';
-var stateInicial = {
+const toolkit_1 = require("@reduxjs/toolkit");
+const stateInicial = {
     modalCargandoVisible: false,
     mensajeModalCargando: ""
 };
 //=================================================================
 //      FUNCION REDUCTORA
 //=================================================================
-export var controlador = createSlice({
+exports.controlador = (0, toolkit_1.createSlice)({
     name: 'modal',
     initialState: stateInicial,
     reducers: {
-        setModalCargandoVisible: function (state, accion) {
+        setModalCargandoVisible: (state, accion) => {
             state.modalCargandoVisible = accion.payload;
         },
-        setMensajeModalCargando: function (state, accion) {
+        setMensajeModalCargando: (state, accion) => {
             state.mensajeModalCargando = accion.payload;
         },
-        mostrarModalCargando: function (state, accion) {
+        mostrarModalCargando: (state, accion) => {
             state.modalCargandoVisible = true;
             state.mensajeModalCargando = accion.payload;
         },
-        ocultarModalCargando: function (state) {
+        ocultarModalCargando: (state) => {
             state.modalCargandoVisible = false;
             state.mensajeModalCargando = "Cargando ...";
         }
@@ -32,9 +35,9 @@ export var controlador = createSlice({
 //=================================================================
 //      EXPORTACION DE LAS ACCIONES 
 //=================================================================
-export var setModalCargandoVisible = controlador.actions.setModalCargandoVisible;
-export var setMensajeModalCargando = controlador.actions.setMensajeModalCargando;
-export var mostrarModalCargando = controlador.actions.mostrarModalCargando;
-export var ocultarModalCargando = controlador.actions.ocultarModalCargando;
+exports.setModalCargandoVisible = exports.controlador.actions.setModalCargandoVisible;
+exports.setMensajeModalCargando = exports.controlador.actions.setMensajeModalCargando;
+exports.mostrarModalCargando = exports.controlador.actions.mostrarModalCargando;
+exports.ocultarModalCargando = exports.controlador.actions.ocultarModalCargando;
 // SE EXPORTA EL LA FUNCION REDUCTORA
-export default controlador.reducer;
+exports.default = exports.controlador.reducer;

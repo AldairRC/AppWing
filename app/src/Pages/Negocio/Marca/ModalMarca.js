@@ -1,105 +1,90 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 //=====================================================
 //  IMPORTACIONES GENERALES
 //=====================================================
-import React from 'react';
+const react_1 = __importDefault(require("react"));
 // componentes MUI
-import { IconButton, Modal, Menu, MenuItem } from "@mui/material";
+const material_1 = require("@mui/material");
 // iconos
-import { faTimes, faBars, faPencilAlt, faVoteYea, faTrash, faImage } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+const free_solid_svg_icons_1 = require("@fortawesome/free-solid-svg-icons");
+const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
 // css
-import "./ModalMarca.css";
+require("./ModalMarca.css");
 //=====================================================
 //  DEFINCION DEL COMPONENTE
 //=====================================================
-var ModalMarca = /** @class */ (function (_super) {
-    __extends(ModalMarca, _super);
-    function ModalMarca(props) {
-        var _this = _super.call(this, props) || this;
-        _this.iconoMenu = React.createRef();
+class ModalMarca extends react_1.default.Component {
+    constructor(props) {
+        super(props);
+        this.iconoMenu = react_1.default.createRef();
         /*============================
             INICIALIZACION DEL ESTADO
         ==============================*/
-        _this.state =
+        this.state =
             {
                 menuVisible: false
             };
-        return _this;
     }
-    ModalMarca.prototype.ocultarMenu = function () {
-        this.setState(function (STATE, PROPS) {
+    ocultarMenu() {
+        this.setState((STATE, PROPS) => {
             return {
                 menuVisible: false
             };
         });
-    };
-    ModalMarca.prototype.renderizarImagenMarca = function () {
-        var _this = this;
-        var imagen = (React.createElement("img", { src: this.props.imagen, onClick: function (evento) { _this.props.handleClick_imagen(); } }));
+    }
+    renderizarImagenMarca() {
+        let imagen = (react_1.default.createElement("img", { src: this.props.imagen, onClick: (evento) => { this.props.handleClick_imagen(); } }));
         if (this.props.imagen == "") {
-            imagen = (React.createElement("div", { className: 'iconoImagen', onClick: function (evento) { _this.props.handleClick_imagen(); } },
-                React.createElement(FontAwesomeIcon, { icon: faImage })));
+            imagen = (react_1.default.createElement("div", { className: 'iconoImagen', onClick: (evento) => { this.props.handleClick_imagen(); } },
+                react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faImage })));
         }
         return imagen;
-    };
+    }
     //======================================
     //  DEFINICION DEL HTML
     //======================================
-    ModalMarca.prototype.render = function () {
-        var _this = this;
-        return (React.createElement(Modal, { className: 'modalMarca', open: this.props.modalVisible },
-            React.createElement("div", { className: 'contenidoModal' },
-                React.createElement("div", { className: (this.props.headerVisible) ? 'divHeader' : 'oculto' },
-                    React.createElement(IconButton, { className: "iconoMenuMarca", ref: this.iconoMenu, onClick: function (evento) {
-                            _this.setState(function (STATE, PROPS) {
+    render() {
+        return (react_1.default.createElement(material_1.Modal, { className: 'modalMarca', open: this.props.modalVisible },
+            react_1.default.createElement("div", { className: 'contenidoModal' },
+                react_1.default.createElement("div", { className: (this.props.headerVisible) ? 'divHeader' : 'oculto' },
+                    react_1.default.createElement(material_1.IconButton, { className: "iconoMenuMarca", ref: this.iconoMenu, onClick: (evento) => {
+                            this.setState((STATE, PROPS) => {
                                 return {
                                     menuVisible: true
                                 };
                             });
                         } },
-                        React.createElement(FontAwesomeIcon, { icon: faBars })),
-                    React.createElement(Menu, { className: 'menuMarca', anchorEl: this.iconoMenu.current, open: this.state.menuVisible, onClose: function (evento) { _this.ocultarMenu(); } },
-                        React.createElement(MenuItem, { className: 'itemMenu', onClick: function (evento) {
-                                _this.ocultarMenu();
-                                _this.props.handleClick_seleccionar();
+                        react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faBars })),
+                    react_1.default.createElement(material_1.Menu, { className: 'menuMarca', anchorEl: this.iconoMenu.current, open: this.state.menuVisible, onClose: (evento) => { this.ocultarMenu(); } },
+                        react_1.default.createElement(material_1.MenuItem, { className: 'itemMenu', onClick: (evento) => {
+                                this.ocultarMenu();
+                                this.props.handleClick_seleccionar();
                             } },
-                            React.createElement("div", { className: 'icono' },
-                                React.createElement(FontAwesomeIcon, { className: 'icono', icon: faVoteYea })),
-                            React.createElement("label", null, " Seleccionar ")),
-                        React.createElement(MenuItem, { className: 'itemMenu', onClick: function (evento) {
-                                _this.ocultarMenu();
-                                _this.props.handleClick_editar();
+                            react_1.default.createElement("div", { className: 'icono' },
+                                react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { className: 'icono', icon: free_solid_svg_icons_1.faVoteYea })),
+                            react_1.default.createElement("label", null, " Seleccionar ")),
+                        react_1.default.createElement(material_1.MenuItem, { className: 'itemMenu', onClick: (evento) => {
+                                this.ocultarMenu();
+                                this.props.handleClick_editar();
                             } },
-                            React.createElement("div", { className: 'icono' },
-                                React.createElement(FontAwesomeIcon, { icon: faPencilAlt })),
-                            React.createElement("label", null, " Editar ")),
-                        React.createElement(MenuItem, { className: 'itemMenu', onClick: function (evento) {
-                                _this.ocultarMenu();
-                                _this.props.handleClick_eliminar();
+                            react_1.default.createElement("div", { className: 'icono' },
+                                react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faPencilAlt })),
+                            react_1.default.createElement("label", null, " Editar ")),
+                        react_1.default.createElement(material_1.MenuItem, { className: 'itemMenu', onClick: (evento) => {
+                                this.ocultarMenu();
+                                this.props.handleClick_eliminar();
                             } },
-                            React.createElement("div", { className: 'icono' },
-                                React.createElement(FontAwesomeIcon, { icon: faTrash })),
-                            React.createElement("label", null, " Eliminar "))),
-                    React.createElement(IconButton, { className: "iconoX", onClick: function (evento) { _this.props.handleClick_X(); } },
-                        React.createElement(FontAwesomeIcon, { icon: faTimes }))),
+                            react_1.default.createElement("div", { className: 'icono' },
+                                react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faTrash })),
+                            react_1.default.createElement("label", null, " Eliminar "))),
+                    react_1.default.createElement(material_1.IconButton, { className: "iconoX", onClick: (evento) => { this.props.handleClick_X(); } },
+                        react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: free_solid_svg_icons_1.faTimes }))),
                 this.renderizarImagenMarca(),
-                React.createElement("div", { className: 'divNombre' }, this.props.nombre))));
-    };
-    return ModalMarca;
-}(React.Component));
-export default ModalMarca;
+                react_1.default.createElement("div", { className: 'divNombre' }, this.props.nombre))));
+    }
+}
+exports.default = ModalMarca;

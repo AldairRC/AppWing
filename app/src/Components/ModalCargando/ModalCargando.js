@@ -1,48 +1,36 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 //=====================================================
 //  IMPORTACIONES GENERALES
 //=====================================================
-import React from 'react';
+const react_1 = __importDefault(require("react"));
 // componentes MUI
-import { Modal } from "@mui/material";
+const material_1 = require("@mui/material");
 // logo
-import logo from "../../RECURSOS/Imagenes/logo.png";
+const logo_png_1 = __importDefault(require("../../RECURSOS/Imagenes/logo.png"));
 // css
-import "./ModalCargandoMovil.css";
+require("./ModalCargandoMovil.css");
 //=====================================================
 //  DEFINCION DEL COMPONENTE
 //=====================================================
-var ModalCargando = /** @class */ (function (_super) {
-    __extends(ModalCargando, _super);
-    function ModalCargando(props) {
-        return _super.call(this, props) || this;
+class ModalCargando extends react_1.default.Component {
+    constructor(props) {
+        super(props);
     }
     //======================================
     //  DEFINICION DEL HTML
     //======================================
-    ModalCargando.prototype.render = function () {
-        return (React.createElement(Modal, { className: "modalCargando", open: this.props.modalVisible },
-            React.createElement("div", { className: "contenidoModal" },
-                React.createElement("img", { src: logo }),
-                React.createElement("label", null,
+    render() {
+        return (react_1.default.createElement(material_1.Modal, { className: "modalCargando", open: this.props.modalVisible },
+            react_1.default.createElement("div", { className: "contenidoModal" },
+                react_1.default.createElement("img", { src: logo_png_1.default }),
+                react_1.default.createElement("label", null,
                     " ",
                     this.props.texto,
                     " "))));
-    };
-    return ModalCargando;
-}(React.Component));
-export default ModalCargando;
+    }
+}
+exports.default = ModalCargando;

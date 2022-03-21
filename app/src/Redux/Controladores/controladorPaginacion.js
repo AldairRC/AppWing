@@ -1,18 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setPaginaActual = exports.controlador = void 0;
 //=================================================================
 //      IMPORTACIONES
 //=================================================================
-import { createSlice } from '@reduxjs/toolkit';
-var stateInicial = {
+const toolkit_1 = require("@reduxjs/toolkit");
+const stateInicial = {
     paginaActual: 1
 };
 //=================================================================
 //      FUNCION REDUCTORA
 //=================================================================
-export var controlador = createSlice({
+exports.controlador = (0, toolkit_1.createSlice)({
     name: 'paginacion',
     initialState: stateInicial,
     reducers: {
-        setPaginaActual: function (state, accion) {
+        setPaginaActual: (state, accion) => {
             state.paginaActual = accion.payload;
         }
     }
@@ -20,6 +23,6 @@ export var controlador = createSlice({
 //=================================================================
 //      EXPORTACION DE LAS ACCIONES 
 //=================================================================
-export var setPaginaActual = controlador.actions.setPaginaActual;
+exports.setPaginaActual = exports.controlador.actions.setPaginaActual;
 // SE EXPORTA EL LA FUNCION REDUCTORA
-export default controlador.reducer;
+exports.default = exports.controlador.reducer;
