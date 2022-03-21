@@ -1,68 +1,96 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.classElementoConTooltip = void 0;
 //=====================================================
 //  IMPORTACIONES GENERALES
 //=====================================================
-const react_1 = __importDefault(require("react"));
+import React from 'react';
 // componentes MUI
-const material_1 = require("@mui/material");
+import { Tooltip, Zoom, ClickAwayListener } from '@mui/material';
 // componente icono
-const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // css
-require("./TooltipPersonalizado.css");
+import './TooltipPersonalizado.css';
 //=====================================================
 //  CONSTANTES
 //=====================================================
-class classElementoConTooltip {
-}
-exports.classElementoConTooltip = classElementoConTooltip;
-classElementoConTooltip.ELEMENTO_LABEL = 1;
-classElementoConTooltip.ELEMENTO_ICONO = 2;
+var classElementoConTooltip = /** @class */ (function () {
+    function classElementoConTooltip() {
+    }
+    classElementoConTooltip.ELEMENTO_LABEL = 1;
+    classElementoConTooltip.ELEMENTO_ICONO = 2;
+    return classElementoConTooltip;
+}());
+export { classElementoConTooltip };
 //=====================================================
 //  DEFINCION DEL COMPONENTE
 //=====================================================
-class ElementoConTooltip extends react_1.default.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+var ElementoConTooltip = /** @class */ (function (_super) {
+    __extends(ElementoConTooltip, _super);
+    function ElementoConTooltip(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
             tooltipVisible: false
         };
+        return _this;
     }
-    renderizarTooltip() {
-        return (react_1.default.createElement("div", { className: 'divContenido' },
-            react_1.default.createElement("label", { className: 'titulo' },
+    ElementoConTooltip.prototype.renderizarTooltip = function () {
+        return (React.createElement("div", { className: 'divContenido' },
+            React.createElement("label", { className: 'titulo' },
                 " ",
                 this.props.tituloTooltip,
                 " "),
-            react_1.default.createElement("label", { className: 'descripcion' },
+            React.createElement("label", { className: 'descripcion' },
                 " ",
                 this.props.descripcionTooltip,
                 " ")));
-    }
-    renderizarElemento() {
+    };
+    ElementoConTooltip.prototype.renderizarElemento = function () {
+        var _this = this;
         // ELEMENTO_LABEL SE TOMA COMO DEFAULT
-        let item = (react_1.default.createElement("div", { className: this.props.CSS, onClick: (evento) => { this.mostrarTooltip(true); } }, this.props.texto));
+        var item = (React.createElement("div", { className: this.props.CSS, onClick: function (evento) { _this.mostrarTooltip(true); } }, this.props.texto));
         switch (this.props.tipoElemento) {
             case classElementoConTooltip.ELEMENTO_ICONO:
-                item = (react_1.default.createElement("div", { className: this.props.CSS, onClick: (evento) => { this.mostrarTooltip(true); } },
-                    react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: this.props.icono })));
+                item = (React.createElement("div", { className: this.props.CSS, onClick: function (evento) { _this.mostrarTooltip(true); } },
+                    React.createElement(FontAwesomeIcon, { icon: this.props.icono })));
                 break;
         }
         return item;
-    }
-    mostrarTooltip(visible) {
-        this.setState(Object.assign(Object.assign({}, this.state), { tooltipVisible: visible }));
-    }
+    };
+    ElementoConTooltip.prototype.mostrarTooltip = function (visible) {
+        this.setState(__assign(__assign({}, this.state), { tooltipVisible: visible }));
+    };
     //======================================
     //  DEFINICION DEL HTML
     //======================================
-    render() {
-        return (react_1.default.createElement(material_1.ClickAwayListener, { onClickAway: (evento) => this.mostrarTooltip(false) },
-            react_1.default.createElement(material_1.Tooltip, { title: this.renderizarTooltip(), TransitionComponent: material_1.Zoom, arrow: true, enterDelay: 500, leaveDelay: 500, disableFocusListener: true, disableHoverListener: true, disableTouchListener: true, open: this.state.tooltipVisible }, this.renderizarElemento())));
-    }
-}
-exports.default = ElementoConTooltip;
+    ElementoConTooltip.prototype.render = function () {
+        var _this = this;
+        return (React.createElement(ClickAwayListener, { onClickAway: function (evento) { return _this.mostrarTooltip(false); } },
+            React.createElement(Tooltip, { title: this.renderizarTooltip(), TransitionComponent: Zoom, arrow: true, enterDelay: 500, leaveDelay: 500, disableFocusListener: true, disableHoverListener: true, disableTouchListener: true, open: this.state.tooltipVisible }, this.renderizarElemento())));
+    };
+    return ElementoConTooltip;
+}(React.Component));
+export default ElementoConTooltip;

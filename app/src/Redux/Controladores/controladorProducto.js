@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReduxProducto_setSeccionActual = exports.ReduxProducto_setProductoBD_como_ProductoActual = exports.ReduxProducto_limpiarProductoActual = exports.ReduxProducto_limpiarProductoBD = exports.ReduxProducto_setProductoActual = exports.ReduxProducto_setProductoBD = exports.ReduxProducto_setCategoriaActual = exports.ReduxProducto_setMarcaActual = exports.controlador = void 0;
 //=================================================================
 //      IMPORTACIONES
 //=================================================================
-const toolkit_1 = require("@reduxjs/toolkit");
-const stateInicial = {
+import { createSlice } from '@reduxjs/toolkit';
+var stateInicial = {
     productoBD: {
         id: "",
         id_negocio: "",
@@ -54,11 +51,11 @@ const stateInicial = {
 //=================================================================
 //      FUNCION REDUCTORA
 //=================================================================
-exports.controlador = (0, toolkit_1.createSlice)({
+export var controlador = createSlice({
     name: 'producto',
     initialState: stateInicial,
     reducers: {
-        limpiarProductoBD: (state) => {
+        limpiarProductoBD: function (state) {
             state.productoBD =
                 {
                     id: "",
@@ -82,7 +79,7 @@ exports.controlador = (0, toolkit_1.createSlice)({
                     imagenes_tipo: []
                 };
         },
-        limpiarProductoActual: (state) => {
+        limpiarProductoActual: function (state) {
             state.actual =
                 {
                     id: "",
@@ -106,7 +103,7 @@ exports.controlador = (0, toolkit_1.createSlice)({
                     imagenes_tipo: []
                 };
         },
-        setProductoBD_como_ProductoActual: (state) => {
+        setProductoBD_como_ProductoActual: function (state) {
             state.actual =
                 {
                     id: state.productoBD.id,
@@ -130,7 +127,7 @@ exports.controlador = (0, toolkit_1.createSlice)({
                     imagenes_tipo: state.productoBD.imagenes_tipo
                 };
         },
-        setProductoBD: (state, accion) => {
+        setProductoBD: function (state, accion) {
             state.productoBD =
                 {
                     id: accion.payload.id,
@@ -153,7 +150,7 @@ exports.controlador = (0, toolkit_1.createSlice)({
                     imagenes_tipo: accion.payload.imagenes_tipo
                 };
         },
-        setProductoActual: (state, accion) => {
+        setProductoActual: function (state, accion) {
             state.actual.nombre = accion.payload.nombre;
             state.actual.descripcion = accion.payload.descripcion;
             state.actual.codigo_barras = accion.payload.codigo_barras;
@@ -163,20 +160,20 @@ exports.controlador = (0, toolkit_1.createSlice)({
             state.actual.imagenes_base64 = accion.payload.imagenes_base64;
             state.actual.imagenes_tipo = accion.payload.imagenes_tipo;
         },
-        setMarcaActual: (state, accion) => {
+        setMarcaActual: function (state, accion) {
             state.actual.marca_id = accion.payload.id;
             state.actual.marca_nombre = accion.payload.nombre;
             state.actual.marca_imagen = accion.payload.imagen;
             state.actual.marca_imagenTipo = accion.payload.imagenTipo;
         },
-        setCategoriaActual: (state, accion) => {
+        setCategoriaActual: function (state, accion) {
             state.actual.categoria_id = accion.payload.id;
             state.actual.categoria_nombre = accion.payload.nombre;
             state.actual.categoria_imagen = accion.payload.imagen;
             state.actual.categoria_imagenTipo = accion.payload.imagenTipo;
             state.actual.categoria_ubicacion = accion.payload.ubicacion;
         },
-        setSeccionActual: (state, accion) => {
+        setSeccionActual: function (state, accion) {
             state.seccionActual = accion.payload;
         }
     }
@@ -184,13 +181,13 @@ exports.controlador = (0, toolkit_1.createSlice)({
 //=================================================================
 //      EXPORTACION DE LAS ACCIONES 
 //=================================================================
-exports.ReduxProducto_setMarcaActual = exports.controlador.actions.setMarcaActual;
-exports.ReduxProducto_setCategoriaActual = exports.controlador.actions.setCategoriaActual;
-exports.ReduxProducto_setProductoBD = exports.controlador.actions.setProductoBD;
-exports.ReduxProducto_setProductoActual = exports.controlador.actions.setProductoActual;
-exports.ReduxProducto_limpiarProductoBD = exports.controlador.actions.limpiarProductoBD;
-exports.ReduxProducto_limpiarProductoActual = exports.controlador.actions.limpiarProductoActual;
-exports.ReduxProducto_setProductoBD_como_ProductoActual = exports.controlador.actions.setProductoBD_como_ProductoActual;
-exports.ReduxProducto_setSeccionActual = exports.controlador.actions.setSeccionActual;
+export var ReduxProducto_setMarcaActual = controlador.actions.setMarcaActual;
+export var ReduxProducto_setCategoriaActual = controlador.actions.setCategoriaActual;
+export var ReduxProducto_setProductoBD = controlador.actions.setProductoBD;
+export var ReduxProducto_setProductoActual = controlador.actions.setProductoActual;
+export var ReduxProducto_limpiarProductoBD = controlador.actions.limpiarProductoBD;
+export var ReduxProducto_limpiarProductoActual = controlador.actions.limpiarProductoActual;
+export var ReduxProducto_setProductoBD_como_ProductoActual = controlador.actions.setProductoBD_como_ProductoActual;
+export var ReduxProducto_setSeccionActual = controlador.actions.setSeccionActual;
 // SE EXPORTA EL LA FUNCION REDUCTORA
-exports.default = exports.controlador.reducer;
+export default controlador.reducer;

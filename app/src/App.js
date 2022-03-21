@@ -1,64 +1,59 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 //=====================================================
 //  IMPORTACIONES GENERALES
 //=====================================================
-const react_1 = __importDefault(require("react"));
-const react_router_dom_1 = require("react-router-dom");
-require("./App.css");
+import React from 'react';
+import { Navigate, Route, Routes, useNavigate, BrowserRouter } from 'react-router-dom';
+import './App.css';
 // redux
-const store_1 = __importDefault(require("./Redux/store"));
-const react_redux_1 = require("react-redux");
-const hooks_1 = require("./Redux/hooks");
+import store from './Redux/store';
+import { Provider } from 'react-redux';
+import { useReduxSelector, useReduxDispatch } from './Redux/hooks';
 //=====================================================
 //  IMPORTACIONES DE MIS COMPONENTES
 //=====================================================
-const PaginaAlmacenProductos_1 = __importDefault(require("./Pages/Negocio/ListaProductos/PaginaAlmacenProductos"));
-const PaginaProducto_1 = __importDefault(require("./Pages/Negocio/Producto/PaginaProducto"));
-const ModalCargando_1 = __importDefault(require("./Components/ModalCargando/ModalCargando"));
-const PaginaMarca_1 = __importDefault(require("./Pages/Negocio/Marca/PaginaMarca"));
-const PaginaCategorias_1 = __importDefault(require("./Pages/Negocio/Categorias/PaginaCategorias"));
+import PaginaAlmacenProductos from './Pages/Negocio/ListaProductos/PaginaAlmacenProductos';
+import PaginaProducto from './Pages/Negocio/Producto/PaginaProducto';
+import ModalCargando from './Components/ModalCargando/ModalCargando';
+import PaginaMarca from './Pages/Negocio/Marca/PaginaMarca';
+import PaginaCategorias from './Pages/Negocio/Categorias/PaginaCategorias';
 //=====================================================
 //  DEFINICION DEL COMPONENTE <App>
 //=====================================================
-const App = (props) => {
-    return (react_1.default.createElement(react_redux_1.Provider, { store: store_1.default },
-        react_1.default.createElement(react_router_dom_1.BrowserRouter, null,
-            react_1.default.createElement(Rutas, null)),
-        react_1.default.createElement(VentanaCargando, null)));
+var App = function (props) {
+    return (React.createElement(Provider, { store: store },
+        React.createElement(BrowserRouter, null,
+            React.createElement(Rutas, null)),
+        React.createElement(VentanaCargando, null)));
 };
 //=====================================================
 //  DEFINICION DEL COMPONENTE <VentanaCargando>
 //  ESTE COMPONENTE ALBERGA EL MODAL CARGANDO
 //=====================================================
-const VentanaCargando = (props) => {
+var VentanaCargando = function (props) {
     // hooks
-    const stateReduxModal = (0, hooks_1.useReduxSelector)(state => state.controladorModal);
+    var stateReduxModal = useReduxSelector(function (state) { return state.controladorModal; });
     // html
-    return (react_1.default.createElement(ModalCargando_1.default, { modalVisible: stateReduxModal.modalCargandoVisible, texto: stateReduxModal.mensajeModalCargando }));
+    return (React.createElement(ModalCargando, { modalVisible: stateReduxModal.modalCargandoVisible, texto: stateReduxModal.mensajeModalCargando }));
 };
 //=====================================================
 //  DEFINICION DEL COMPONENTE <Rutas>
 // AQUI ESTARAN TODAS LAS PAGINAS DE LA APP
 //=====================================================
-const Rutas = (props) => {
+var Rutas = function (props) {
     //_____________________________
     // USO DE LOS HOOKS
     //_____________________________
-    const navigate = (0, react_router_dom_1.useNavigate)();
-    const stateReduxPaginacion = (0, hooks_1.useReduxSelector)(state => state.controladorPaginacion);
-    const stateReduxModal = (0, hooks_1.useReduxSelector)(state => state.controladorModal);
-    const stateReduxProducto = (0, hooks_1.useReduxSelector)(state => state.controladorProducto);
-    const dispatchRedux = (0, hooks_1.useReduxDispatch)();
-    return (react_1.default.createElement(react_router_dom_1.Routes, null,
-        react_1.default.createElement(react_router_dom_1.Route, { path: '/', element: react_1.default.createElement(PaginaAlmacenProductos_1.default, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxModal: stateReduxModal, stateReduxProducto: stateReduxProducto, dispatchRedux: dispatchRedux }) }),
-        react_1.default.createElement(react_router_dom_1.Route, { path: '/Categorias', element: react_1.default.createElement(PaginaCategorias_1.default, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxProducto: stateReduxProducto, stateReduxModal: stateReduxModal, dispatchRedux: dispatchRedux }) }),
-        react_1.default.createElement(react_router_dom_1.Route, { path: '/Marcas', element: react_1.default.createElement(PaginaMarca_1.default, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxProducto: stateReduxProducto, stateReduxModal: stateReduxModal, dispatchRedux: dispatchRedux }) }),
-        react_1.default.createElement(react_router_dom_1.Route, { path: '/Producto', element: react_1.default.createElement(PaginaProducto_1.default, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxModal: stateReduxModal, stateReduxProducto: stateReduxProducto, dispatchRedux: dispatchRedux }) }),
-        react_1.default.createElement(react_router_dom_1.Route, { path: '/MisProductos', element: react_1.default.createElement(PaginaAlmacenProductos_1.default, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxModal: stateReduxModal, stateReduxProducto: stateReduxProducto, dispatchRedux: dispatchRedux }) }),
-        react_1.default.createElement(react_router_dom_1.Route, { path: '*', element: react_1.default.createElement(react_router_dom_1.Navigate, { to: '/' }) })));
+    var navigate = useNavigate();
+    var stateReduxPaginacion = useReduxSelector(function (state) { return state.controladorPaginacion; });
+    var stateReduxModal = useReduxSelector(function (state) { return state.controladorModal; });
+    var stateReduxProducto = useReduxSelector(function (state) { return state.controladorProducto; });
+    var dispatchRedux = useReduxDispatch();
+    return (React.createElement(Routes, null,
+        React.createElement(Route, { path: '/', element: React.createElement(PaginaAlmacenProductos, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxModal: stateReduxModal, stateReduxProducto: stateReduxProducto, dispatchRedux: dispatchRedux }) }),
+        React.createElement(Route, { path: '/Categorias', element: React.createElement(PaginaCategorias, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxProducto: stateReduxProducto, stateReduxModal: stateReduxModal, dispatchRedux: dispatchRedux }) }),
+        React.createElement(Route, { path: '/Marcas', element: React.createElement(PaginaMarca, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxProducto: stateReduxProducto, stateReduxModal: stateReduxModal, dispatchRedux: dispatchRedux }) }),
+        React.createElement(Route, { path: '/Producto', element: React.createElement(PaginaProducto, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxModal: stateReduxModal, stateReduxProducto: stateReduxProducto, dispatchRedux: dispatchRedux }) }),
+        React.createElement(Route, { path: '/MisProductos', element: React.createElement(PaginaAlmacenProductos, { navigate: navigate, stateReduxPaginacion: stateReduxPaginacion, stateReduxModal: stateReduxModal, stateReduxProducto: stateReduxProducto, dispatchRedux: dispatchRedux }) }),
+        React.createElement(Route, { path: '*', element: React.createElement(Navigate, { to: '/' }) })));
 };
-exports.default = App;
+export default App;

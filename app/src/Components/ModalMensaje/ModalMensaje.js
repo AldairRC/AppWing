@@ -1,32 +1,42 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MENSAJE_PREGUNTA = exports.MENSAJE_ERROR = exports.MENSAJE_CORRECTO = void 0;
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 //=====================================================
 //  IMPORTACIONES GENERALES
 //=====================================================
-const react_1 = __importDefault(require("react"));
+import React from 'react';
 // componentes MUI
-const material_1 = require("@mui/material");
+import { Button, Modal } from "@mui/material";
 // iconos
-const free_solid_svg_icons_1 = require("@fortawesome/free-solid-svg-icons");
-const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
+import { faTimesCircle, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // css
-require("./ModalMensaje.css");
+import "./ModalMensaje.css";
 //=====================================================
 //  INTERFACES
 //=====================================================
-exports.MENSAJE_CORRECTO = 1;
-exports.MENSAJE_ERROR = 2;
-exports.MENSAJE_PREGUNTA = 3;
+export var MENSAJE_CORRECTO = 1;
+export var MENSAJE_ERROR = 2;
+export var MENSAJE_PREGUNTA = 3;
 //=====================================================
 //  DEFINCION DEL COMPONENTE
 //=====================================================
-class ModalMensaje extends react_1.default.Component {
-    constructor(props) {
-        super(props);
+var ModalMensaje = /** @class */ (function (_super) {
+    __extends(ModalMensaje, _super);
+    function ModalMensaje(props) {
+        return _super.call(this, props) || this;
         /*============================
             INICIALIZACION DEL ESTADO
         ==============================
@@ -34,86 +44,90 @@ class ModalMensaje extends react_1.default.Component {
         {
         } */
     }
-    renderizarIcono() {
-        let divTipoMensaje = "";
-        let divIcono = "";
-        let icono;
+    ModalMensaje.prototype.renderizarIcono = function () {
+        var divTipoMensaje = "";
+        var divIcono = "";
+        var icono;
         switch (this.props.tipo) {
-            case exports.MENSAJE_CORRECTO:
+            case MENSAJE_CORRECTO:
                 divTipoMensaje = "divTipoMensaje divTipoMensaje_verde";
                 divIcono = "divIcono divIcono_verde";
-                icono = free_solid_svg_icons_1.faCheckCircle;
+                icono = faCheckCircle;
                 break;
-            case exports.MENSAJE_ERROR:
+            case MENSAJE_ERROR:
                 divTipoMensaje = "divTipoMensaje divTipoMensaje_rojo";
                 divIcono = "divIcono divIcono_rojo";
-                icono = free_solid_svg_icons_1.faTimesCircle;
+                icono = faTimesCircle;
                 break;
             default:
                 divTipoMensaje = "divTipoMensaje divTipoMensaje_azul";
                 divIcono = "divIcono divIcono_azul";
-                icono = free_solid_svg_icons_1.faExclamationCircle;
+                icono = faExclamationCircle;
                 break;
         }
-        return (react_1.default.createElement("div", { className: divTipoMensaje },
-            react_1.default.createElement("div", { className: divIcono },
-                react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: icono }))));
-    }
-    renderizarTitulo() {
-        let labelTitulo = "";
+        return (React.createElement("div", { className: divTipoMensaje },
+            React.createElement("div", { className: divIcono },
+                React.createElement(FontAwesomeIcon, { icon: icono }))));
+    };
+    ModalMensaje.prototype.renderizarTitulo = function () {
+        var labelTitulo = "";
         switch (this.props.tipo) {
-            case exports.MENSAJE_CORRECTO:
+            case MENSAJE_CORRECTO:
                 labelTitulo = "labelTitulo labelTitulo_verde";
                 break;
-            case exports.MENSAJE_ERROR:
+            case MENSAJE_ERROR:
                 labelTitulo = "labelTitulo labelTitulo_rojo";
                 break;
             default:
                 labelTitulo = "labelTitulo labelTitulo_azul";
                 break;
         }
-        return (react_1.default.createElement("label", { className: labelTitulo }, this.props.titulo));
-    }
-    renderizarBotonAceptar() {
-        if (this.props.tipo == exports.MENSAJE_PREGUNTA)
+        return (React.createElement("label", { className: labelTitulo }, this.props.titulo));
+    };
+    ModalMensaje.prototype.renderizarBotonAceptar = function () {
+        var _this = this;
+        if (this.props.tipo == MENSAJE_PREGUNTA)
             return null;
-        let botonAceptarCSS = "";
+        var botonAceptarCSS = "";
         switch (this.props.tipo) {
-            case exports.MENSAJE_CORRECTO:
+            case MENSAJE_CORRECTO:
                 botonAceptarCSS = "boton botonVerde";
                 break;
-            case exports.MENSAJE_ERROR:
+            case MENSAJE_ERROR:
                 botonAceptarCSS = "boton botonRojo";
                 break;
             default:
                 botonAceptarCSS = "boton botonAzul";
                 break;
         }
-        return (react_1.default.createElement(material_1.Button, { className: botonAceptarCSS, onClick: (evento) => { this.props.handleClick_botonAceptar(); } }, "Aceptar"));
-    }
-    renderizarBotonNO() {
-        if (this.props.tipo != exports.MENSAJE_PREGUNTA)
+        return (React.createElement(Button, { className: botonAceptarCSS, onClick: function (evento) { _this.props.handleClick_botonAceptar(); } }, "Aceptar"));
+    };
+    ModalMensaje.prototype.renderizarBotonNO = function () {
+        var _this = this;
+        if (this.props.tipo != MENSAJE_PREGUNTA)
             return null;
-        return (react_1.default.createElement(material_1.Button, { className: 'boton botonRojo', onClick: (evento) => { this.props.handleClick_botonNO(); } }, "No"));
-    }
-    renderizarBotonSI() {
-        if (this.props.tipo != exports.MENSAJE_PREGUNTA)
+        return (React.createElement(Button, { className: 'boton botonRojo', onClick: function (evento) { _this.props.handleClick_botonNO(); } }, "No"));
+    };
+    ModalMensaje.prototype.renderizarBotonSI = function () {
+        var _this = this;
+        if (this.props.tipo != MENSAJE_PREGUNTA)
             return null;
-        return (react_1.default.createElement(material_1.Button, { className: 'boton botonVerde', onClick: (evento) => { this.props.handleClick_botonSI(); } }, "Si"));
-    }
+        return (React.createElement(Button, { className: 'boton botonVerde', onClick: function (evento) { _this.props.handleClick_botonSI(); } }, "Si"));
+    };
     //======================================
     //  DEFINICION DEL HTML
     //======================================
-    render() {
-        return (react_1.default.createElement(material_1.Modal, { className: 'modalMensaje', open: this.props.modalVisible },
-            react_1.default.createElement("div", { className: 'contenidoModal' },
+    ModalMensaje.prototype.render = function () {
+        return (React.createElement(Modal, { className: 'modalMensaje', open: this.props.modalVisible },
+            React.createElement("div", { className: 'contenidoModal' },
                 this.renderizarIcono(),
                 this.renderizarTitulo(),
-                react_1.default.createElement("label", { className: 'labelDescripcion' }, this.props.descripcion),
-                react_1.default.createElement("div", { className: 'divBotones' },
+                React.createElement("label", { className: 'labelDescripcion' }, this.props.descripcion),
+                React.createElement("div", { className: 'divBotones' },
                     this.renderizarBotonAceptar(),
                     this.renderizarBotonNO(),
                     this.renderizarBotonSI()))));
-    }
-}
-exports.default = ModalMensaje;
+    };
+    return ModalMensaje;
+}(React.Component));
+export default ModalMensaje;
